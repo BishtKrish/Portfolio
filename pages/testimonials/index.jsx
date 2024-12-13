@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-
 import TestimonialSlider from "../../components/TestimonialSlider";
 import { fadeIn } from "../../variants";
 
