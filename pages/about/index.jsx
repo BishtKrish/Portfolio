@@ -80,7 +80,7 @@ export const aboutData = [
     title: "Eduction",
     info: [
       {
-        title: "B.Tech- DevBhoomi Uttarakhand University Dehradun",
+        title: "B.Tech(CSE) - DevBhoomi Uttarakhand University Dehradun",
         stage: "2022-2026",
       },
       {

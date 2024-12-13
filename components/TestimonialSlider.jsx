@@ -20,14 +20,14 @@ const testimonialData = [
     name: "Renky Srivastava",
     position: "Customer",
     message:
-      "Outstanding work! Very responsive, creative, and detail-oriented. Exceeded expectations and brought our vision to life. A pleasure to collaborate with!",
+      "Outstanding work! Very responsive, creative, and detail-oriented.  A pleasure to collaborate with!",
   },
   {
     image: "/t-avt-1.png",
     name: "Riya Chaudhary",
     position: "Customer",
     message:
-      "Impressive talent! Delivered quality work efficiently with excellent communication throughout. A true professional who made the entire process seamless. Highly recommended!",
+      "Impressive talent! Delivered quality work efficiently with excellent communication throughout.  Highly recommended!",
   },
 ];
 
