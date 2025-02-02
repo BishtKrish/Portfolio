@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { BsArrowRight } from "react-icons/bs";
 import { fadeIn } from "../../variants";
 import { useState } from "react";
+import emailjs from "emailjs-com";
 
 const Contact = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -10,15 +11,17 @@ const Contact = () => {
     event.preventDefault();
     setIsLoading(true);
 
-    const myForm = event.target;
-    const formData = new FormData(myForm);
-
-    fetch("/", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams(formData).toString(),
-    })
-      .then(() => alert("Thank you. I will get back to you ASAP."))
+    emailjs
+      .sendForm(
+        "service_rm9ew65", // Replace with your EmailJS Service ID
+        "template_pboohri", // Replace with your EmailJS Template ID
+        event.target,
+        "PBK9T3UEQBvI15PWI" // Replace with your EmailJS Public Key
+      )
+      .then(() => {
+        alert("Thank you. I will get back to you ASAP.");
+        event.target.reset(); // Reset the form after successful submission
+      })
       .catch((error) => console.log(error))
       .finally(() => setIsLoading(false));
   };
@@ -26,9 +29,7 @@ const Contact = () => {
   return (
     <div className="h-full bg-primary/30">
       <div className="container mx-auto py-32 text-center xl:text-left flex items-center justify-center h-full">
-        {/* text & form */}
         <div className="flex flex-col w-full max-w-[700px]">
-          {/* text */}
           <motion.h2
             variants={fadeIn("up", 0.2)}
             initial="hidden"
@@ -39,7 +40,6 @@ const Contact = () => {
             Let's <span className="text-accent">connect.</span>
           </motion.h2>
 
-          {/* form */}
           <motion.form
             variants={fadeIn("up", 0.4)}
             initial="hidden"
@@ -49,30 +49,23 @@ const Contact = () => {
             onSubmit={handleSubmit}
             autoComplete="off"
             autoCapitalize="off"
-            // only needed for production (in netlify) to accept form input
-            data-netlify="true"
           >
-            {/* input group */}
             <div className="flex gap-x-6 w-full">
               <input
                 type="text"
-                name="name"
+                name="from_name"
                 placeholder="Name"
                 className="input"
                 disabled={isLoading}
-                aria-disabled={isLoading}
                 required
-                aria-required
               />
               <input
                 type="email"
-                name="email"
+                name="from_email"
                 placeholder="E-mail"
                 className="input"
                 disabled={isLoading}
-                aria-disabled={isLoading}
                 required
-                aria-required
               />
             </div>
             <input
@@ -81,29 +74,23 @@ const Contact = () => {
               placeholder="Subject"
               className="input"
               disabled={isLoading}
-              aria-disabled={isLoading}
               required
-              aria-required
             />
             <textarea
               name="message"
               placeholder="Message..."
               className="textarea"
               disabled={isLoading}
-              aria-disabled={isLoading}
               required
-              aria-required
             />
             <button
               type="submit"
               className="btn rounded-full border border-white/50 max-w-[170px] px-8 transition-all duration-300 flex items-center justify-center overflow-hidden hover:border-accent group"
               disabled={isLoading}
-              aria-disabled={isLoading}
             >
               <span className="group-hover:-translate-y-[120%] group-hover:opacity-0 transition-all duration-500">
-                Let's talk
+                {isLoading ? "Sending..." : "Let's talk"}
               </span>
-
               <BsArrowRight
                 className="-translate-y-[120%] opacity-0 group-hover:flex group-hover:-translate-y-0 group-hover:opacity-100 transition-all duration-300 absolute text-[22px]"
                 aria-hidden
